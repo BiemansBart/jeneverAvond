@@ -27,6 +27,9 @@
               "src/assets"
             ],
             "styles": [
+              {
+                "input": "src/palette.scss"
+              },
               "src/styles.scss"
             ],
             "scripts": []
