@@ -1,9 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {JeneverService} from './service/jenever.service';
-import {Observable} from 'rxjs';
 import {Jenever} from '../Jenever';
-import {AngularFireList} from '@angular/fire/database';
-import {forEach} from '@angular/router/src/utils/collection';
+import {LOCAL_STORAGE, StorageService} from 'angular-webstorage-service';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +10,15 @@ import {forEach} from '@angular/router/src/utils/collection';
 })
 export class AppComponent implements OnInit {
   title = 'jeneverAvond';
-
-  constructor() {
+  jeneverList: Jenever[];
+  constructor(private service: JeneverService, @Inject(LOCAL_STORAGE) private localStorage: StorageService) {
   }
 
   ngOnInit(): void {
-
-
+    this.service.getJenevers().subscribe(x => {
+    this.jeneverList = x as Jenever[];
+    console.log(this.jeneverList[0].naam);
+      },
+      error1 => console.log(error1));
   }
-
-
 }

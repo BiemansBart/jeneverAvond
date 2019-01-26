@@ -14,6 +14,11 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { RatingComponent } from './rating/rating.component';
+import {StorageServiceModule} from 'angular-webstorage-service';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
 
 const appRoutes: Routes = [
   {path: '', component: JeneverComponent}
@@ -21,9 +26,12 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    JeneverComponent
+    JeneverComponent,
+    RatingComponent
   ],
   imports: [
+    MatCheckboxModule,
+    StorageServiceModule,
     MatToolbarModule,
     MatButtonModule,
     MatExpansionModule,
@@ -36,6 +44,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
     ),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   exports: [
     MatButtonModule,
